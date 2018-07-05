@@ -20,6 +20,15 @@ This extension allows to use regular expressions to highlight text on a web page
 
 The name is inspired by the austrian tv show "Inspector Rex". The main character, a german shephard named Rex, is a police dog that helps find evidence and solve crimes (https://en.wikipedia.org/wiki/Inspector_Rex).
 
+## Screenshots
+
+**Extension active**
+![Screenshot](screenshots/Example_1.png)
+
+**Extension options**
+![Options](screenshots/Example_2.png)
+
+
 ## Credits
 
 This extension was inspired by [linkuha/ext-resh](https://github.com/linkuha/ext-resh). 
