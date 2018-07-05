@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <title>Popup</title>
+    <style>
+        #popup-container {
+            width: 150px;
+        }
+
+        #button-container {
+            display: flex;
+        }
+
+        #active-profiles {
+            margin: 5px 0 0 0;
+            padding-left: 25px;
+        }
+
+        .enabled {
+            background-color: #9bff48;
+        }
+
+        .disabled {
+            background-color: #cc6862;
+        }
+
+        #btn-open-options {
+            background-color: #FEFEFE;
+        }
+
+        input[type="button"] {
+            flex: 1;
+            padding: 5px;
+        }
+
+        input[type="button"]:focus {
+            outline: 0;
+        }
+
+        #refresh {
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="popup-container">
+    <b>Active profiles:</b>
+    <ul id="active-profiles">
+        <li>None</li>
+    </ul>
+    <br/>
+    <div id="button-container">
+        <input id="btn-toggle-activation" class="disabled" type="button" value="Activate"/>
+        <input id="btn-open-options" class="" type="button" value="Options"/>
+    </div>
+    <div id="refresh" style="display: none">
+        <a href="#" id="refresh-button">Click to refresh for changes to take effect</a>
+    </div>
+</div>
+<script type="module" src="js/popup.js"></script>
+</body>
+</html>

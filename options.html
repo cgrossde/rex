@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Rex - Search and Highlight</title>
+    <script type="module" src="js/options/vue-2.5.16.dev.js"></script>
+    <script type="module" src="js/options/main.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" id="app" v-show="appLoaded" style="display: none">
+    <div class="row">
+        <br/>
+        <h2>Regex Highlight and Collapse Settings</h2>
+        <br/>
+    </div>
+    <!-- PROFILE SELECT -->
+    <div class="row">
+        <div class="col-md-2">
+            <label for="select-profile">Settings of Profile</label>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <select @change="changeCurrentProfile" class="form-control input-sm">
+                    <option disabled v-if="profiles.length === 0">None</option>
+                    <option v-for="profile in profiles" :value="profile.id">{{profile.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" @click="deleteProfile" class="btn btn-sm btn-danger">Delete</button>
+                <button type="button" @click="showAddProfilForm = true" class="btn btn-sm btn-primary">Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- PROFILE ADD -->
+    <div class="row" v-show="showAddProfilForm" style="display: none">
+        <div class="col-md-2">
+            <label for="profile-name">Profile Name</label>
+        </div>
+        <div class="col-md-3">
+            <input type="text" v-model="newProfileName" class="form-control input-sm" placeholder="My Profile">
+        </div>
+        <div class="col-md-2">
+            <button type="button" @click="createProfile" class="btn btn-sm btn-primary">Create profile
+            </button>
+        </div>
+    </div>
+    <hr/>
+    <!-- PROFILE EDIT VIEW -->
+    <div class="row" v-if="currentProfile">
+        <!-- REGEX HIGHLIGHT-->
+        <h3>Highlight</h3>
+        <highlight-edit v-bind:current-profile="currentProfile"></highlight-edit>
+
+        <!-- PAGE FILTER -->
+        <h3>Active on</h3>
+        <pages-edit v-bind:current-profile="currentProfile"></pages-edit>
+        <hr/>
+
+        <button @click="saveCurrentProfile" class="btn btn-success">Save</button>
+    </div>
+</div>
+</body>
+</html>

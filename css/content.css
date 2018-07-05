@@ -1,0 +1,21 @@
+span.regexp {
+	padding: 2px; 
+	background-color: red; 
+	margin: 0px;
+}
+
+div.hidden {
+	display: none;
+}
+
+div.hc-collapsed {
+	
+}
+
+div.hc-collapse-header {
+	cursor: pointer;
+}
+
+span.test {
+	color: red;
+}
