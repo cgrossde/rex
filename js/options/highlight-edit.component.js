@@ -4,7 +4,7 @@ import {Highlight} from "./Profile.js";
 // language=HTML
 const template = `
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <table class="table">
                 <thead>
                 <tr>
@@ -35,7 +35,7 @@ const template = `
             <button class="btn btn-sm btn-primary" @click="addHighlight">Add</button>
         </div>
         <!-- SANDBOX for testing -->
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading"><h4 class="panel-title">Preview</h4></div>
                 <div class="panel-body">
@@ -57,13 +57,16 @@ const template = `
 
 export default Vue.component('highlight-edit', {
   template,
+  props: ['currentProfile'],
   data: function () {
     return {
       editSandbox: false,
       sandboxText: 'Lorem ipsum dolor sid amed.'
     }
   },
-  props: ['currentProfile'],
+  mounted() {
+    this.updateSandboxText()
+  },
   methods: {
     addHighlight() {
       this.currentProfile.highlight.push(new Highlight())
@@ -84,5 +87,5 @@ export default Vue.component('highlight-edit', {
       this.editSandbox = false
       Vue.nextTick(this.updateSandboxText.bind(this))
     }
-  }
+  },
 })
