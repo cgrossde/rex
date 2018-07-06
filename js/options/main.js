@@ -27,7 +27,7 @@ const app = new Vue({
   },
   methods: {
     createProfile: async function () {
-      this.currentProfile = this.setCurrentProfile(await ProfileStore.newProfile(this.newProfileName))
+      this.setCurrentProfile(await ProfileStore.newProfile(this.newProfileName))
       this.showAddProfilForm = false
       this.newProfileName = ''
     },
@@ -40,6 +40,7 @@ const app = new Vue({
       await ProfileStore.saveProfile(this.currentProfile)
     },
     setCurrentProfile: function(currentProfile) {
+      this.$refs.profileDropdown.value = currentProfile.id
       this.currentProfile = Vue.util.extend(new Profile(), currentProfile)
     },
     changeCurrentProfile: function(event) {
@@ -64,7 +65,7 @@ chrome.storage.onChanged.addListener(async function (changes, namespace) {
     app.profiles = changes.profiles.newValue
     const currentProfileDeleted = app.profiles.every(profile => profile.id !== app.currentProfile.id)
     if (currentProfileDeleted && app.profiles.length > 0) {
-      app.currentProfile = app.setCurrentProfile(app.profiles[0])
+      app.setCurrentProfile(app.profiles[0])
     }
   }
 })

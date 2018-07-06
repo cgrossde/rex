@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <select @change="changeCurrentProfile" class="form-control input-sm">
+                <select @change="changeCurrentProfile" ref="profileDropdown" class="form-control input-sm">
                     <option disabled v-if="profiles.length === 0">None</option>
                     <option v-for="profile in profiles" :value="profile.id">{{profile.name}}</option>
                 </select>
@@ -50,13 +50,13 @@
     </div>
     <hr/>
     <!-- PROFILE EDIT VIEW -->
-    <div class="row" v-if="currentProfile">
+    <div class="row" v-if="this.profiles.length > 0 && currentProfile">
         <!-- REGEX HIGHLIGHT-->
         <h3>Highlight</h3>
         <highlight-edit v-bind:current-profile="currentProfile"></highlight-edit>
 
         <!-- PAGE FILTER -->
-        <h3>Active on</h3>
+        <h3>Active on URLs</h3>
         <pages-edit v-bind:current-profile="currentProfile"></pages-edit>
         <hr/>
 
