@@ -11,8 +11,25 @@ chrome.storage.local.get(['extensionEnabled'], ({extensionEnabled}) => {
 function notifyUserIfProfileChanged() {
   chrome.storage.onChanged.addListener(function (changes, namespace) {
     if (namespace === 'sync' && 'profiles' in changes) {
-      alert("Profile was changed in options, refresh page.")
+      const activeProfilesOnPage = getChangedProfiles(changes.profiles.oldValue, changes.profiles.newValue)
+        .some(profile => {
+          return profile.pages.some(page => {
+            const pageRegexp = RegExp(page.regEx)
+            return page.active && page.regEx !== '' && pageRegexp.test(document.location.href)
+          })
+        })
+      if (activeProfilesOnPage)
+        alert("Profile was changed in options, refresh page.")
     }
+  })
+}
+
+function getChangedProfiles(oldProfiles, newProfiles) {
+  return newProfiles.filter(newProfile => {
+    const oldProfile = oldProfiles.filter(oldProfile => oldProfile.id === newProfile.id)[0] || null
+    if (!oldProfile)
+      return false
+    return JSON.stringify(oldProfile) !== JSON.stringify(newProfile)
   })
 }
 
