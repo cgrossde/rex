@@ -2,6 +2,8 @@ const EXCLUDES = ['HTML', 'NOSCRIPT', 'HEAD', 'STYLE', 'TITLE', 'LINK', 'SCRIPT'
 
 // TODO: Allow nested collapse blocks?
 export function collapseText(collapseConfig, searchNode) {
+  if (!collapseConfig.active || collapseConfig.startRegEx === '' || collapseConfig.stopRegEx === '')
+    return
   searchNode = searchNode || document.body
   const collapseFn = (nodes) => {
     collapseTextNodes(collapseConfig, nodes)

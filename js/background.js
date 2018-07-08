@@ -11,7 +11,7 @@ const defaultProfile = {
     {regEx: 'google', active: true},
   ],
   collapse: [
-    {startRegEx: '', stopRegEx: '', title: '', color: '#CCC', active: false}
+    {startRegEx: 'at com.sun.jersey.api', stopRegEx: 'at com.apache.catalina', title: 'Framework noise', color: '#CCC', active: false}
   ]
 }
 
