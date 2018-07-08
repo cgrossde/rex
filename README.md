@@ -1,19 +1,22 @@
-# Rex - Search and Highlight
+# Rex - Highlight or Collapse Text
 
-This extension allows to use regular expressions to highlight text on a web page. It was developed to facilitate log analysis (e.g. highlight important parts of stacktraces)
+This extension allows to use regular expressions to highlight or collapse text on a web page. It was developed to facilitate log analysis (e.g. highlight important parts of stacktraces, collapsing framework noise)
 
 ## Features
 
 - Use regex to highlight text
+- Use regex to collapse text
 - Define different colors for each regex
 - Profiles to organize regex in groups 
 - Url matcher to define on which pages profile should be active
-- Enable/disable regex or url matcher
+- Temporarily enable/disable regex
 
 ## Todo
 
-- Add collapsable blocks
-- Add ability to execute JS
+- Allow to collapse text that contains other dom nodes (e.g. span for styling, images, ...)
+- Export settings and import them from URL (e.g. store settings in git with code)
+- (Auto?)-update imported settings
+- Execute custom JS
 
 
 ## Why Rex?
