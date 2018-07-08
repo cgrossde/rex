@@ -54,6 +54,7 @@ const app = new Vue({
     },
     saveCurrentProfile: async function () {
       await ProfileStore.saveProfile(this.currentProfile)
+      this.changed = false
     },
     setCurrentProfile: function (currentProfile) {
       this.$refs.profileDropdown.value = currentProfile.id
