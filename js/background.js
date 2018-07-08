@@ -15,11 +15,13 @@ const defaultProfile = {
   ]
 }
 
-chrome.runtime.onInstalled.addListener(function () {
-  chrome.storage.sync.set({currentProfile: defaultProfile, profiles: [defaultProfile]}, function () {
-    console.log("Default profile initialized", defaultProfile)
-  })
-  chrome.storage.local.set({extensionEnabled: true}, () => {})
+chrome.runtime.onInstalled.addListener(function (details) {
+  if (details.reason === 'install') {
+    chrome.storage.sync.set({currentProfile: defaultProfile, profiles: [defaultProfile]}, function () {
+      console.log("Default profile initialized", defaultProfile)
+    })
+    chrome.storage.local.set({extensionEnabled: true}, () => {})
+  }
 })
 
 
