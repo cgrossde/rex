@@ -1,4 +1,4 @@
-import Profile from "./Profile.js";
+import Profile, {Page} from "./Profile.js";
 
 async function getProfiles() {
   return new Promise((resolve) => {
@@ -30,6 +30,9 @@ async function saveProfile(newProfile) {
 
 async function newProfile(profileName) {
   const newProfile = new Profile(profileName)
+  const enabledOnAllPages = new Page()
+  enabledOnAllPages.regEx = '.*'
+  newProfile.addPage(enabledOnAllPages)
   await addProfile(newProfile)
   return newProfile
 }

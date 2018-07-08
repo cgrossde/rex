@@ -40,7 +40,7 @@ function getProfiles() {
 }
 
 /**
- * Inject profiles and load content_module.js as a module to allow for using imports
+ * Inject profiles and load rex_extension.js as a module to allow for using imports
  */
 function loadExtension(profiles) {
   const listOfProfilesScript = document.createElement('script');
@@ -48,6 +48,6 @@ function loadExtension(profiles) {
   document.head.appendChild(listOfProfilesScript);
   const script = document.createElement('script')
   script.setAttribute("type", "module")
-  script.setAttribute("src", chrome.extension.getURL('js/content/content_module.js'))
+  script.setAttribute("src", chrome.extension.getURL('js/content/rex_extension.js'))
   document.head.appendChild(script);
 }

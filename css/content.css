@@ -1,21 +1,35 @@
-span.regexp {
-	padding: 2px; 
-	background-color: red; 
-	margin: 0px;
-}
-
 div.hidden {
 	display: none;
 }
 
 div.hc-collapsed {
-	
+	border-radius: 4px;
+	line-height: normal!important;
 }
 
 div.hc-collapse-header {
+	font-weight: bold;
 	cursor: pointer;
+	padding: 5px;
+	padding-left: 10px;
 }
 
-span.test {
-	color: red;
+div.hc-collapse-body {
+	border-top: 1px solid #999;
+	padding: 5px;
+	padding-top: 0;
+	overflow-y: scroll;
+}
+
+.rex_extension .fixed-header {
+	z-index: 1000;
+	background-color: #fff;
+	position: fixed;
+	top:0;
+	left: 0;
+	right: 0;
+}
+
+.rex_extension .content {
+	margin-top: 220px;
 }

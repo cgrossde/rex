@@ -4,63 +4,68 @@
     <meta charset="UTF-8"/>
     <title>Rex - Search and Highlight</title>
     <script type="module" src="js/options/vue-2.5.16.dev.js"></script>
-    <script type="module" src="js/options/main.js"></script>
+    <script type="module" src="js/options/app.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/content.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="container" id="app" v-show="appLoaded" style="display: none">
-    <div class="row">
-        <br/>
-        <h2>Regex Highlight and Collapse Settings</h2>
-        <br/>
-    </div>
-    <!-- PROFILE SELECT -->
-    <div class="row">
-        <div class="col-md-2">
-            <label for="select-profile">Settings of Profile</label>
+<div class="rex_extension" id="app" v-show="appLoaded" style="display: none">
+    <div class="fixed-header container">
+        <div class="row">
+            <br/>
+            <h1>Regex Highlight and Collapse Settings</h1>
+            <br/>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <select @change="changeCurrentProfile" ref="profileDropdown" class="form-control input-sm">
-                    <option disabled v-if="profiles.length === 0">None</option>
-                    <option v-for="profile in profiles" :value="profile.id">{{profile.name}}</option>
-                </select>
+        <!-- PROFILE SELECT -->
+        <div class="row">
+            <div class="col-md-2">
+                <h4>Settings of Profile</h4>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select @change="changeCurrentProfile" ref="profileDropdown" class="form-control">
+                        <option disabled v-if="profiles.length === 0">None</option>
+                        <option v-for="profile in profiles" :value="profile.id">{{profile.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="btn-group">
+                    <button type="button" @click="deleteProfile" class="btn btn-sm btn-danger">Delete</button>
+                    <button type="button" @click="showAddProfilForm = true" class="btn btn-sm btn-primary">Add
+                    </button>
+                    <button type="button" @click="saveCurrentProfile" class="btn btn-sm btn-success">Save</button>
+                </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="btn-group">
-                <button type="button" @click="deleteProfile" class="btn btn-sm btn-danger">Delete</button>
-                <button type="button" @click="showAddProfilForm = true" class="btn btn-sm btn-primary">Add
+        <!-- PROFILE ADD -->
+        <div class="row" v-show="showAddProfilForm" style="display: none">
+            <div class="col-md-2">
+                <label for="profile-name">Profile Name</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" v-model="newProfileName" class="form-control input-sm" placeholder="My Profile">
+            </div>
+            <div class="col-md-2">
+                <button type="button" @click="createProfile" class="btn btn-sm btn-primary">Create profile
                 </button>
             </div>
         </div>
-    </div>
-    <!-- PROFILE ADD -->
-    <div class="row" v-show="showAddProfilForm" style="display: none">
-        <div class="col-md-2">
-            <label for="profile-name">Profile Name</label>
-        </div>
-        <div class="col-md-3">
-            <input type="text" v-model="newProfileName" class="form-control input-sm" placeholder="My Profile">
-        </div>
-        <div class="col-md-2">
-            <button type="button" @click="createProfile" class="btn btn-sm btn-primary">Create profile
-            </button>
-        </div>
-    </div>
-    <hr/>
-    <!-- PROFILE EDIT VIEW -->
-    <div class="row" v-if="this.profiles.length > 0 && currentProfile">
-        <!-- REGEX HIGHLIGHT-->
-        <h3>Highlight</h3>
-        <highlight-edit v-bind:current-profile="currentProfile"></highlight-edit>
-
-        <!-- PAGE FILTER -->
-        <h3>Active on URLs</h3>
-        <pages-edit v-bind:current-profile="currentProfile"></pages-edit>
+        <b v-show="changed" class="text-primary">Profile "{{currentProfile.name}}" changed. Don't forget to save!</b>
         <hr/>
+    </div>
+    <div class="container content">
+        <!-- PROFILE EDIT VIEW -->
+        <div class="row" v-if="this.profiles.length > 0 && currentProfile">
+            <!-- REGEX HIGHLIGHT-->
+            <highlight-edit v-bind:current-profile="currentProfile"></highlight-edit>
 
-        <button @click="saveCurrentProfile" class="btn btn-success">Save</button>
+            <!-- COLLAPSE TEXT -->
+            <collapse-edit v-bind:current-profile="currentProfile"></collapse-edit>
+
+            <!-- PAGE FILTER -->
+            <pages-edit v-bind:current-profile="currentProfile"></pages-edit>
+        </div>
     </div>
 </div>
 </body>
