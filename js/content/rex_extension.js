@@ -4,7 +4,8 @@ import {collapseText} from './collapseText.js';
 
 
 // INIT
-const activeProfiles = window.ext_rex_profile_list
+const profileList = window.ext_rex_profile_list || []
+const activeProfiles = profileList
   .map(profile => Object.assign(new Profile(), profile))
   .filter(profile => profile.isActive(window.location.href))
 if (activeProfiles.length > 0)
