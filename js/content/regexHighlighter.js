@@ -63,9 +63,28 @@ function highlightNode(node, highlighConfigList) {
   }
 }
 
+function getReplaceMatchFn(color) {
+  return (match) => {
+    return `<span class="ext-rex-highlighted-text" style="background-color: ${color}">${match}</span>`
+  }
+}
+
 function getFragmetWithMatchesHighlighted(html, config) {
-  html = html.replace(config.regEx, function (match) {
-    return `<span class="ext-rex-highlighted-text" style="background-color: ${config.color}">${match}</span>`
+  // Checkout string.replace docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter
+  html = html.replace(config.regEx, function (match, ...rest) {
+    const replaceMatch = getReplaceMatchFn(config.color)
+    const [fullText, matchPos] = [rest.pop(), rest.pop()]
+    if (rest.length > 0) {
+      // Highlight every group
+      let result = match
+      while(rest.length > 0) {
+        result = result.replace(rest.pop(), replaceMatch)
+      }
+      return result;
+    } else {
+      // Highlight match
+      return replaceMatch(match)
+    }
   })
 
   // Replace node with new html

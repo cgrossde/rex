@@ -2,6 +2,8 @@
 
 This extension allows to use regular expressions to highlight or collapse text on a web page. It was developed to facilitate log analysis (e.g. highlight important parts of stacktraces, collapsing framework noise)
 
+Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/rex-regex-highlight-or-co/eejlhekkafpkffbhpidchepheodkgnib)
+
 ## Features
 
 - Use regex to highlight text
