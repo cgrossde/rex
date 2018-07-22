@@ -1,4 +1,5 @@
 import {regexHighlight} from './regexHighlighter.js'
+import {regexHighlightAcrossTags} from './regexHighlighterAcrossTags.js'
 import Profile from '../options/Profile.js'
 import {collapseText} from './collapseText.js';
 
@@ -26,6 +27,6 @@ function run(profiles) {
 
   // Then highlight
   startTime = new Date()
-  regexHighlight(highlightConfigs)
+  regexHighlightAcrossTags(highlightConfigs)
   console.log(`Highlight took ${new Date().getTime() - startTime.getTime()}ms`)
 }

@@ -1,4 +1,4 @@
-import {regexHighlight} from "../content/regexHighlighter.js"
+import {regexHighlightAcrossTags} from "../content/regexHighlighterAcrossTags.js"
 import {Highlight} from "./Profile.js";
 
 // language=HTML
@@ -8,7 +8,7 @@ const template = `
             <div class="col-md-6">
                 <h3>Highlight
                     <button class="btn btn-sm btn-primary pull-right" @click="addHighlight">
-                        <i class="glyphicon glyphicon-plus" />&nbsp;Add
+                        <i class="glyphicon glyphicon-plus"/>&nbsp;Add
                     </button>
                 </h3>
             </div>
@@ -26,14 +26,14 @@ const template = `
                     </thead>
                     <tbody>
                     <tr v-for="highlight in currentProfile.highlight">
-                        <td><input @change="updateSandboxText" v-model="highlight.active" type="checkbox"/></td>
+                        <td><input v-model="highlight.active" type="checkbox"/></td>
                         <td>
                             <span class="text-muted">/</span>
-                            <input @input="updateSandboxText" v-model="highlight.regEx" type="text"
+                            <input v-model="highlight.regEx" type="text"
                                    placeholder="RegEx to highlight"/>
                             <span class="text-muted">/gim</span>
                         </td>
-                        <td><input @change="updateSandboxText" v-model="highlight.color" type="color"/></td>
+                        <td><input v-model="highlight.color" type="color"/></td>
                         <td>
                             <button class="btn btn-danger btn-xs"
                                     @click="currentProfile.removeHighlight(highlight); updateSandboxText()"><i
@@ -77,8 +77,9 @@ export default Vue.component('highlight-edit', {
   mounted() {
     this.updateSandboxText()
   },
-  updated() {
-    this.updateSandboxText()
+  updated(a, b) {
+    if (!this.editSandbox)
+      this.updateSandboxText()
   },
   methods: {
     addHighlight() {
@@ -94,7 +95,7 @@ export default Vue.component('highlight-edit', {
       // Reset
       this.$refs.sandboxText.innerHTML = this.sandboxText
       // Highlight
-      regexHighlight(this.currentProfile.highlight, this.$refs.sandboxText)
+      regexHighlightAcrossTags(this.currentProfile.highlight, this.$refs.sandboxText)
     },
     hideSandboxInput() {
       this.editSandbox = false

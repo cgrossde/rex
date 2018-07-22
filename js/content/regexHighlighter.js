@@ -8,44 +8,6 @@ export function regexHighlight(highlightConfigs, searchNode) {
   walkDOM(searchNode, highlightFunction)
 }
 
-
-
-function buildTextToNodeMap(node) {
-  // Each element is a Node or a number referencing a previous node
-  const charPosToNodeMap = []
-  let fullText = ''
-
-  function updateMap(node) {
-    if (node.nodeType !== 3) {
-      return // No text node
-    }
-    const nodeText = node.data
-    if (nodeText.length === 0)
-      return
-
-    // Add text to fullText
-    fullText += nodeText
-
-    // First char is node
-    charPosToNodeMap.push(node)
-    const posOfNode = charPosToNodeMap.length -1
-
-    for(let i = 1; i < nodeText.length; i++) {
-      charPosToNodeMap.push(posOfNode)
-    }
-
-    if (fullText.length !== charPosToNodeMap.length)
-      throw new Error('fullText and charPosToNodeMap out of sync')
-  }
-
-  walkDOM(node, updateMap)
-
-
-  console.log(fullText)
-  console.log(charPosToNodeMap)
-  console.log(node.textContent)
-}
-
 function walkDOM(node, func) {
   let currentNode = node.firstChild
   func(node)
