@@ -44,10 +44,19 @@ function getProfiles() {
  */
 function loadExtension(profiles) {
   const listOfProfilesScript = document.createElement('script');
-  listOfProfilesScript.text = "window.ext_rex_profile_list = JSON.parse('" + JSON.stringify(profiles) + "');"
+  let profileJSON = JSON.stringify(profiles, backslashReplacer);
+  listOfProfilesScript.text = "window.ext_rex_profile_list = JSON.parse('" + profileJSON + "');"
   document.head.appendChild(listOfProfilesScript);
   const script = document.createElement('script')
   script.setAttribute("type", "module")
   script.setAttribute("src", chrome.extension.getURL('js/content/rex_extension.js'))
   document.head.appendChild(script);
+}
+
+function backslashReplacer(key, value) {
+  if ( typeof value == "string")
+  {
+    value = value.replace(/\\/g, "\\\\");
+  }
+  return value;
 }
