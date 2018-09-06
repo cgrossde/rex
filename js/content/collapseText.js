@@ -29,7 +29,7 @@ function walkDOMofTextNodes(node, func) {
     }
     // Non text node => recur
     const nodeNotExcluded = !EXCLUDES.includes(currentNode.nodeName)
-    const isNoCollapsable = !currentNode.classList.contains("hc-collapsed")
+    const isNoCollapsable = !currentNode.classList || !currentNode.classList.contains("hc-collapsed")
     if (nodeNotExcluded && isNoCollapsable)
       walkDOMofTextNodes(currentNode, func)
     currentNode = currentNode.nextSibling
